@@ -47,6 +47,7 @@ pipeline {
 				app.push("latest")
             }
         }
+		}
 		stage('Deploy') {
             steps {
 				echo "test successful"
@@ -58,5 +59,4 @@ pipeline {
             }
         }
     }
-}
 }

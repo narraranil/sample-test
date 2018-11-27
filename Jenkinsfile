@@ -24,9 +24,17 @@ pipeline {
     stages {
 	   stage('Clone repository') {
         /* Let's make sure we have the repository cloned to our workspace */
-
-        checkout scm
+			steps{
+			checkout scm
+			}
 		}
+	   stage('Docker') {
+        /* Let's make sure we have the repository cloned to our workspace */
+			steps{
+				docker login -u narraranil@gmail.com -p Sahi91011
+			}
+		}
+				
         stage('Build'){
             steps {
                 echo "build successful"

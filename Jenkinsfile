@@ -31,7 +31,7 @@ pipeline {
 	   stage('Docker') {
         /* Let's make sure we have the repository cloned to our workspace */
 			steps{
-				sh "docker login -u narraranil@gmail.com -p Sahi91011"
+				app = docker.build("sample-test/assets/IS/Packages")
 			}
 		}
 				
@@ -42,8 +42,9 @@ pipeline {
         }
         stage('Push') {
             steps {
-				sh "docker push narraranil/test_docker:1.0"
-				echo "deploy successful"
+				docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+				app.push("${env.BUILD_NUMBER}")
+				app.push("latest")
             }
         }
 		stage('Deploy') {

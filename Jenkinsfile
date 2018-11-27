@@ -23,9 +23,10 @@ pipeline {
 
     stages {
         stage('Push Image') {
-
+		 steps {
 		bat 'docker push narraranil/test_docker:1.0' 
-
+		}
+		
 		}
     }
 }

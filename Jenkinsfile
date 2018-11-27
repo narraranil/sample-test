@@ -18,25 +18,15 @@
 *
 */
 
-node{
-	def app
+pipeline {
+    agent any 
 
-	   stage('Clone repository') {
-
-			checkout scm
-	
-		}
-	   stage('Build Image') {
-
-				app = docker.build("sample-test/assets/IS/Packages")
-	
-		}
+    stages {
         stage('Push Image') {
 
-				docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-				app.push("${env.BUILD_NUMBER}")
-				app.push("latest")
-            }
+		bat 'docker push narraranil/test_docker:1.0' 
 
 		}
     }
+}
+

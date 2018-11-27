@@ -18,45 +18,41 @@
 *
 */
 
-pipeline {
-    agent any 
+node{
 	def app
-    stages {
+
 	   stage('Clone repository') {
-        /* Let's make sure we have the repository cloned to our workspace */
-			steps{
+
 			checkout scm
-			}
+	
 		}
 	   stage('Docker') {
-        /* Let's make sure we have the repository cloned to our workspace */
-			steps{
+
 				app = docker.build("sample-test/assets/IS/Packages")
-			}
+	
 		}
 				
         stage('Build'){
-            steps {
+
                 echo "build successful"
-            }
+
         }
         stage('Push') {
-            steps {
+
 				docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
 				app.push("${env.BUILD_NUMBER}")
 				app.push("latest")
             }
-        }
+
 		}
 		stage('Deploy') {
-            steps {
+
 				echo "test successful"
-            }
+
 		}
 		stage('Test') {
-            steps {
+
 				echo "test successful"
-            }
+
         }
     }
-}

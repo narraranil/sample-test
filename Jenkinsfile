@@ -31,7 +31,7 @@ pipeline {
 	   stage('Docker') {
         /* Let's make sure we have the repository cloned to our workspace */
 			steps{
-				sh docker login -u narraranil@gmail.com -p Sahi91011
+				sh "docker login -u narraranil@gmail.com -p Sahi91011"
 			}
 		}
 				
@@ -42,7 +42,7 @@ pipeline {
         }
         stage('Push') {
             steps {
-				sh docker push narraranil/test_docker:1.0
+				sh "docker push narraranil/test_docker:1.0"
 				echo "deploy successful"
             }
         }

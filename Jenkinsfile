@@ -26,18 +26,12 @@ node{
 			checkout scm
 	
 		}
-	   stage('Docker') {
+	   stage('Build Image') {
 
 				app = docker.build("sample-test/assets/IS/Packages")
 	
 		}
-				
-        stage('Build'){
-
-                echo "build successful"
-
-        }
-        stage('Push') {
+        stage('Push Image') {
 
 				docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
 				app.push("${env.BUILD_NUMBER}")
@@ -45,14 +39,4 @@ node{
             }
 
 		}
-		stage('Deploy') {
-
-				echo "test successful"
-
-		}
-		stage('Test') {
-
-				echo "test successful"
-
-        }
     }

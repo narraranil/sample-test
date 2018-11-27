@@ -40,12 +40,18 @@ pipeline {
                 echo "build successful"
             }
         }
-        stage('Deploy') {
+        stage('Push') {
             steps {
+				docker push narraranil/test_docker:1.0
 				echo "deploy successful"
             }
         }
- 	stage('Test') {
+		stage('Deploy') {
+            steps {
+				echo "test successful"
+            }
+		}
+		stage('Test') {
             steps {
 				echo "test successful"
             }
